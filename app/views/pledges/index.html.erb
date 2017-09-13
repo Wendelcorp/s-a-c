@@ -1,0 +1,27 @@
+<h1>Listing pledges</h1>
+
+<table>
+  <tr>
+    <th>Amount</th>
+    <th>Name</th>
+    <th>Anonymous</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @pledges.each do |pledge| %>
+  <tr>
+    <td><%= pledge.amount %></td>
+    <td><%= pledge.name %></td>
+    <td><%= pledge.anonymous %></td>
+    <td><%= link_to 'Show', [pledge.campaign, pledge] %></td>
+    <td><%= link_to 'Edit', edit_campaign_pledge_path(pledge.campaign, pledge) %></td>
+    <td><%= link_to 'Destroy', [pledge.campaign, pledge], :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Pledge', new_campaign_pledge_path(params[:campaign_id]) %>

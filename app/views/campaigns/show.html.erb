@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @campaign.description %>
+</p>
+
+<p>
+  <strong>Goal:</strong>
+  <%= @campaign.goal %>
+</p>
+
+<table>
+  <tr>
+    <th>Amount</th>
+    <th>Name</th>
+    <th>Anonymous</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @campaign.pledges.each do |pledge| %>
+  <tr>
+    <td><%= pledge.amount %></td>
+    <td><%= pledge.name %></td>
+    <td><%= pledge.anonymous %></td>
+    <td><%= link_to 'Show', [pledge.campaign, pledge] %></td>
+    <td><%= link_to 'Edit', edit_campaign_pledge_path(pledge.campaign, pledge) %></td>
+    <td><%= link_to 'Destroy', [pledge.campaign, pledge], :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<h2>Make a pledge</h2>
+
+<%= render :partial => 'pledges/form', :object => @pledge %>
+
+<%= link_to 'Edit', edit_campaign_path(@campaign) %> |
+<%= link_to 'Back', campaigns_path %>
