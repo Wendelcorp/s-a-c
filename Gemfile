@@ -5,9 +5,13 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem "figaro"
 gem 'devise'
+gem 'stripe'
 gem 'nested_scaffold'
 gem "cocoon"
+gem 'omniauth-stripe-connect'
+gem 'jquery-rails'
 gem 'rails', '~> 5.1.3'
 gem 'sqlite3'
 gem 'puma', '~> 3.7'
