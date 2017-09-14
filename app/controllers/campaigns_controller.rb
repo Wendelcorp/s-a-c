@@ -1,10 +1,10 @@
 class CampaignsController < ApplicationController
   before_action :set_campaign, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!, :except => [:show]
   # GET /campaigns
   # GET /campaigns.json
   def index
-    @campaigns = Campaign.all
+    @campaigns = current_user.campaigns
   end
 
   # GET /campaigns/1
@@ -14,8 +14,9 @@ class CampaignsController < ApplicationController
   end
 
   # GET /campaigns/new
+
   def new
-    @campaign = Campaign.new
+    @campaign = current_user.campaigns.build
   end
 
   # GET /campaigns/1/edit
@@ -25,7 +26,7 @@ class CampaignsController < ApplicationController
   # POST /campaigns
   # POST /campaigns.json
   def create
-    @campaign = Campaign.new(campaign_params)
+    @campaign = current_user.campaigns.build(campaign_params)
 
     respond_to do |format|
       if @campaign.save
@@ -70,6 +71,6 @@ class CampaignsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def campaign_params
-      params.require(:campaign).permit(:description, :goal, pledges_attributes: [:id, :amount, :name, :_destroy])
+      params.require(:campaign).permit(:description, :goal, :user_id, pledges_attributes: [:id, :amount, :name, :_destroy])
     end
 end

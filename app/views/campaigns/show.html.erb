@@ -35,6 +35,7 @@
 <h2>Make a pledge</h2>
 
 <%= render :partial => 'pledges/form', :object => @pledge %>
-
+<% if current_user %>
 <%= link_to 'Edit', edit_campaign_path(@campaign) %> |
+<% end %>
 <%= link_to 'Back', campaigns_path %>
